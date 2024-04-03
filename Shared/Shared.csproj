@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+      <RootNamespace>LoggingDemo.Shared</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Refit" Version="7.0.0" />
+      <PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
+    </ItemGroup>
+
+  <!--  Serilog-->
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="3.1.1"/>
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0"/>
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.3.0"/>
+    <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0"/>
+    <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0"/>
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1"/>
+    <PackageReference Include="Serilog.Sinks.Seq" Version="6.0.0"/>
+  </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore">
+        <HintPath>C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App\8.0.3\Microsoft.AspNetCore.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>

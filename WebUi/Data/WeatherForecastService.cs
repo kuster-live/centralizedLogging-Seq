@@ -1,19 +1,24 @@
-namespace WebUi.Data;
+namespace LoggingDemo.WebUi.Data;
+using LoggingDemo.Shared;
 
 public class WeatherForecastService
 {
-    private static readonly string[] Summaries = new[]
+    private readonly IWeatherForecastApi _api;
+    private readonly ILogger<WeatherForecastService> _logger;
+
+    public WeatherForecastService(IWeatherForecastApi api,
+                                  ILogger<WeatherForecastService> logger)
     {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        _api = api;
+        _logger = logger;
+    }
 
     public Task<WeatherForecast[]> GetForecastAsync(DateOnly startDate)
     {
-        return Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = startDate.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        }).ToArray());
+        using var scope = _logger.BeginScope(new Dictionary<string, object> { ["StartDate"] = startDate });
+
+        _logger.LogInformation("start api call");
+
+        return _api.GetWeatherForecastsAsync(startDate.ToString("yyyy-MM-dd"));
     }
 }

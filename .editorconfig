@@ -11,6 +11,9 @@
 # This file is the top-most EditorConfig file
 root = true
 
+[*.{cs,vb}]
+dotnet_diagnostic.CA1305.severity = none
+
 # All Files
 [*]
 charset=utf-8

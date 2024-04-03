@@ -1,13 +1,23 @@
+using LoggingDemo.Shared;
+using LoggingDemo.WebUi.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using WebUi.Data;
+using Refit;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host
+       .AddSerilog();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+builder.Services.AddRefitClient<IWeatherForecastApi>()
+       .ConfigureHttpClient(c =>
+           c.BaseAddress =
+               new(builder.Configuration.GetConnectionString("Api") ?? throw new InvalidOperationException()));
 
 var app = builder.Build();
 
