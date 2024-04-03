@@ -1,0 +1,17 @@
+version: "3.8"
+
+name: "centralized_logging_seq_demo"
+
+volumes:
+  seqdata:
+
+services:
+  seq:
+    image: datalust/seq
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+    volumes:
+      - seqdata:/data
+    ports:
+      - "5341:80"
